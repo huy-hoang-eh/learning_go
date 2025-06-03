@@ -5,6 +5,7 @@ import (
 	"log"
 
 	"server_mux/handler"
+	"server_mux/sqlite"
 )
 import "net/http"
 
@@ -25,10 +26,14 @@ func initRoutingTable(mux *http.ServeMux) {
 	}
 }
 
+func initDatabase() {
+	sqlite.Init()
+}
+
 func initMuxServer() *http.ServeMux {
 	mux := http.NewServeMux()
 	initRoutingTable(mux)
-
+	initDatabase()
 	return mux
 }
 
